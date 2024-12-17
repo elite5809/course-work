@@ -1,0 +1,1 @@
+This is a contract between Alice and Bob. Alice agrees to sell to Bob her NFT art for a price of: $100000

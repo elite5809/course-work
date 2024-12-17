@@ -1,0 +1,116 @@
+Skip to content
+Home
+Your O'Reilly
+Profile
+History
+Playlists
+Assignments
+Highlights
+Answers
+Featured
+Navigating Change
+Recommended
+Explore
+All Topics
+Early Releases
+Shared Playlists
+Most Popular Titles
+Resource Centers
+Live Events
+All Events
+Architectural Katas
+AI & ML
+Data Sci & Eng
+Programming
+Infra & Ops
+Software Arch
+Interact
+Scenarios
+Sandboxes
+Jupyter Notebooks
+Certifications
+Settings
+Support
+Newsletters
+Sign Out
+Table of Contents for Introduction to Cryptography with Coding Theory, 3rd Edition
+Search in book...
+
+Toggle Font Controls
+PREVPrevious Chapter
+11.6 Exercises
+NEXTNext Chapter
+12.2 Multicollisions
+Chapter 12 Hash Functions: Attacks and Applications
+12.1 Birthday Attacks
+If there are 23 people in a room, the probability is slightly more than 50% that two of them have the same birthday. If there are 30, the probability is around 70%. This might seem surprising; it is called the birthday paradox. Let’s see why it’s true. We’ll ignore leap years (which would slightly lower the probability of a match) and we assume that all birthdays are equally likely (if not, the probability of a match would be slightly higher).
+
+Consider the case of 23 people. We’ll compute the probability that they all have different birthdays. Line them up in a row. The first person uses up one day, so the second person has probability (1−1/365) of having a different birthday. There are two days removed for the third person, so the probability is (1−2/365) that the third birthday differs from the first two. Therefore, the probability of all three people having different birthdays is (1−1/365)(1−2/365). Continuing in this way, we see that the probability that all 23 people have different birthdays is
+
+(1−1365)(1−2365)⋯(1−22365)=.493.
+Therefore, the probability of at least two having the same birthday is
+
+1−.493=.507.
+One way to understand the preceding calculation intuitively is to consider the case of 40 people. If the first 30 have a match, we’re done, so suppose the first 30 have different birthdays. Now we have to choose the last 10 birthdays. Since 30 birthdays are already chosen, we have approximately a 10% chance that a randomly chosen birthday will match one of the first 30. And we are choosing 10 birthdays. Therefore, it shouldn’t be too surprising that we get a match. In fact, the probability is 89% that there is a match among 40 people.
+
+More generally, suppose we have N objects, where N is large. There are r people, and each chooses an object (with replacement, so several people could choose the same one). Then
+
+Prob(there is a match)≈1−e−r2/2N.
+(12.1)
+Note that this is only an approximation that holds for large N; for small n it is better to use the above product and obtain an exact answer. In Exercise 12, we derive this approximation. Choosing r2/2N=ln 2,, we find that if r≈1.177N‾‾√, then the probability is 50% that at least two people choose the same object.
+
+To summarize, if there are N possibilities and we have a list of length N‾‾√, then there is a good chance of a match. If we want to increase the chance of a match, we can make the list have length 2N‾‾√ or 5N‾‾√. The main point is that a length of a constant times N‾‾√ (instead of something like N) suffices.
+
+For example, suppose we have 40 license plates, each ending in a three-digit number. What is the probability that two of the license plates end in the same three digits? We have N=1000, the number of possible three-digit numbers, and r=40, the number of license plates under consideration. Since
+
+r22N=.8, 
+the approximate probability of a match is
+
+1−e−.8=.551, 
+which is more than 50%. We stress that this is only an approximation. The correct answer is obtained by calculating
+
+1−(1−11000)(1−21000)⋯(1−391000)=.546.
+The next time you are stuck in traffic (and have a passenger to record numbers), check out this prediction.
+
+But what is the probability that one of these 40 license plates has the same last three digits as yours (assuming that yours ends in three digits)? Each plate has probability 1−1/1000 of not matching yours, so the probability is (1−1/1000)40=.961 that none of the 40 plates matches your plate. The reason the birthday paradox works is that we are not just looking for matches between one fixed plate, such as yours, and the other plates. We are looking for matches between any two plates in the set, so there are many more opportunities for matches.
+
+For more examples, see Examples 36 and 37 in the Computer Appendices.
+
+The applications of these ideas to cryptology require a slightly different setup. Suppose there are two rooms, each with 30 people. What is the probability that someone in the first room has the same birthday as someone in the second room? More generally, suppose there are N objects and there are two groups of r people. Each person from each group selects an object (with replacement). What is the probability that someone from the first group chooses the same object as someone from the second group? In this case,
+
+Prob(there is a match)≈1−e−r2/N.
+(12.2)
+If λ=r2/N, then the probability of exactly i matches is approximately λie−λ/i!. An analysis of this problem, with generalizations, is given in [Girault et al.]. Note that the present situation differs from the earlier problem of finding a match in one set of r people. Here, we have two sets of r people, so a total of 2r people. Therefore, the probability of a match in this set is approximately 1−e−2r2/N. But around half of the time, these matches are between members of the same group, and half the time the matches are the desired ones, namely, between the two groups. The precise effect is to cut the probability down to 1−e−r2/N.
+
+Again, if there are N possibilities and we have two lists of length N‾‾√, then there is a good chance of a match. Also, if we want to increase the chance of a match, we can make the lists have length 2N‾‾√ or 5N‾‾√. The main point is that a length of a constant times N‾‾√ (instead of something like N) suffices.
+
+For example, if we take N=365 and r=30, then
+
+λ=302/365=2.466.
+Since 1−e−λ=.915, there is approximately a 91.5% probability that someone in one group of 30 people has the same birthday as someone in a second group of 30 people.
+
+The birthday attack can be used to find collisions for hash functions if the output of the hash function is not sufficiently large. Suppose that h is an n-bit hash function. Then there are N=2n possible outputs. Make a list h(x) for approximately r=N‾‾√=2n/2 random choices of x. Then we have the situation of r≈N‾‾√ “people” with N possible “birthdays,” so there is a good chance of having two values x1 and x2 with the same hash value. If we make the list longer, for example r=10⋅2n/2 values of x, the probability becomes very high that there is a match.
+
+Similarly, suppose we have two sets of inputs, S and T. If we compute h(s) for approximately N‾‾√ randomly chosen s∈S and compute h(t) for approximately N‾‾√ randomly chosen t∈T, then we expect some value h(s) to be equal to some value h(t). This situation will arise in an attack on signature schemes in Chapter 13, where S will be a set of good documents and T will be a set of fraudulent documents.
+
+If the output of the hash function is around n=60 bits, the above attacks have a high chance of success. It is necessary to make lists of length approximately 2n/2=230≈109 and to store them. This is possible on most computers. However, if the hash function outputs 256-bit values, then the lists have length around 2128≈1038, which is too large, both in time and in memory.
+
+12.1.1 A Birthday Attack on Discrete Logarithms
+Suppose we are working with a large prime p and want to evaluate Lα(h). In other words, we want to solve αx≡h(modp). We can do this with high probability by a birthday attack.
+
+Make two lists, both of length around p‾√:
+
+The first list contains numbers αk(modp) for approximately p‾√ randomly chosen values of k.
+
+The second list contains numbers hα−ℓ(modp) for approximately p‾√ randomly chosen values of ℓ.
+
+There is a good chance that there is a match between some element on the first list and some element on the second list. If so, we have
+
+αk≡hα−ℓ,  hence αk+ℓ≡h(modp).
+Therefore, x≡k+ℓ(modp−1) is the desired discrete logarithm.
+
+Let’s compare this method with the Baby Step, Giant Step (BSGS) method described in Section 10.2. Both methods have running time and storage space proportional to p‾√. However, the BSGS algorithm is deterministic, which means that it is guaranteed to produce an answer. The birthday algorithm is probabilistic, which means that it probably produces an answer, but this is not guaranteed. Moreover, there is a computational advantage to the BSGS algorithm. Computing one member of a list from a previous one requires one multiplication (by α or by α−N). In the birthday algorithm, the exponent k is chosen randomly, so αk must be computed each time. This makes the algorithm slower. Therefore, the BSGS algorithm is somewhat superior to the birthday method.
+
+back to top
+Support Sign Out
+© 2021 O'Reilly Media, Inc. Terms of Service / Privacy Policy

@@ -1,0 +1,53 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>2aed8e6c-eeec-4b13-b43a-86b9d6d2a4fb</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>build_marines_agent.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>StarcraftWarmup</Name>
+    <RootNamespace>StarcraftWarmup</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="build_marines_agent.py" />
+    <Compile Include="build_protoss_agent.py" />
+    <Compile Include="empty_agent.py" />
+    <Compile Include="build_zerg_agent.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="loop_helper.py" />
+    <Compile Include="test_space\nn_test.py" />
+    <Compile Include="test_space\qlearn.py" />
+    <Compile Include="test_space\test.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="test_space\requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="saves\" />
+    <Folder Include="test_space\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

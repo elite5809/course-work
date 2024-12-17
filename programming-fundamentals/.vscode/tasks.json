@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "cl.exe",
+            "args": [
+                "/I",
+                "C:/PDCurses-3.9",
+                "/W4",
+                "/Zi",
+                "/EHsc",
+                "/Fe:",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "${workspaceFolder}\\*.c",
+                "C:/PDCurses-3.9/wincon/*.obj",
+                "/link",
+                "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x86/*.lib"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

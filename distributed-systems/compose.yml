@@ -1,0 +1,51 @@
+networks:
+  dist-sys-net:
+    driver: bridge
+
+services:
+  Middleware:
+    image: dist-sys-net
+    build: .
+    container_name: middleware
+    networks:
+      - dist-sys-net
+    volumes:
+      - ./app:/app
+    restart: always
+    entrypoint: ["python", "/app/Middleware.py"]
+
+  Client:
+    image: dist-sys-net
+    build: .
+    depends_on:
+      - Middleware
+    container_name: client
+    networks:
+      - dist-sys-net
+    volumes:
+      - ./app:/app
+    entrypoint: ["python", "/app/Client.py", "10", "50", "100", "200", "300", "400", "500", "1000"]
+
+  Redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - dist-sys-net
+    restart: always
+    volumes:
+      - ./redis:/data
+  
+  Node:
+    image: dist-sys-net
+    build: .
+    depends_on:
+      - Middleware
+      - Redis
+    deploy:
+      replicas: 6
+    networks:
+      - dist-sys-net
+    restart: always
+    volumes:
+      - ./app:/app
+    entrypoint: ["python", "/app/Node.py"]

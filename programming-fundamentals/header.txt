@@ -1,0 +1,76 @@
+/**
+* ==============================================================
+* Project: Final Project - Tron Light Racer
+* Description: An arena-style game using light bikes to eliminate your opponents
+* Documentation Statement: 
+*   I used this youtube playlist to learn how to use ncurses
+*   https://www.youtube.com/playlist?list=PL2U2TQ__OrQ8jTf0_noNKtHMuYlyxQl4v
+* ==============================================================
+* UserManual/Instructions:
+*   To build the game, ensure that PDCurses3.9 folder is in the root directory.
+*   As for how to play the game, the instructions are in the game itself.
+ *
+ *  Bonus Features (upto 10 pts) - List here
+ *  1) Using a main menu
+ *  2) Getting color in terminal
+ *  3) Status bar at the bottom of the game
+ *
+ *  Required Programming Skills (must have 5 of 6):
+ *   1) Dynamic Memory Allocation
+ *          What you did to meet this req: I dynamically allocated memory for key presses to ensure the pointer doesnt run out taking in key presses per frame
+ *              File: main.c
+ *              Line#: 369 - 375
+ *   2) Pointers
+ *          What you did to meet this req: I initialized my ncurses windows and player list as pointers
+ *              File: main.c
+ *              Line#: 3-5
+ *   3) File I/O
+ *          What you did to meet this req: I have a loadNames and saveNames which saves to a text file
+ *              File: main.c
+ *              Line#: 285 - 295
+ *   4) Structs
+ *          What you did to meet this req: Made a struct for a player type
+ *              File: main.h
+ *              Line#: 12-19
+ *
+ *   5) String Manipulation
+ *          What you did to meet this req: xxx
+ *              File: 
+ *              Line#: 
+ *
+ *   6) Processing of Array Data
+ *          What you did to meet this req: Gathered all key strokes made during the frame and processed them through a switch case
+ *              File: main.c
+ *              Line#: 377-437
+ *
+ *  Required Advanced Programming Skills (1 or more):
+ *   1) Recursion
+ *          What you did to meet this req: xxx
+ *              File: 
+ *              Line#: 
+ *
+ *   2) 2D Dynamic Memory
+ *          What you did to meet this req: Both my names variable and gameArena use this
+ *              File: main.c
+ *              Line#: 23-24, 328-330
+ *
+ *   3) Graphics - Curses or Win32
+ *          What you did to meet this req: Used ncurses
+ *              File: main.c
+ *              Line#: Found throughout code but initialized at 68-75 (initProgram)
+ *
+ *   List any changes or omissions from stated shall requirements (from
+ *   your design) also describe any functionality that isn't working.
+ *      Requirement changes/omissions:
+ *          1) Consolidated updating visuals into updateScreen()
+ *          2) Added killColor() function - once a player dies, deletes their bike and light walls
+ *          3) Added initColors to consolidate the ncurses color pairs initialization
+ *
+ *      Errors:
+ *          1) No errors
+ *          2) 5 warnings about unsafe functions and 2 warnings about unreachable code that does work
+ *
+ *   How many hours did you spend on this project: 
+ *   How many lines of code did you write in total: 
+ *
+*/
